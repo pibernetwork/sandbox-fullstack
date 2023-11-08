@@ -59,6 +59,19 @@ importers:
 
   packages/prettier-config: {}
 
+  packages/typescript-config:
+    dependencies:
+      prettier-config:
+        specifier: workspace:^
+        version: link:../prettier-config
+    devDependencies:
+      '@tsconfig/strictest':
+        specifier: ^2.0.2
+        version: 2.0.2
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:
@@ -349,6 +362,10 @@ packages:
       open: 9.1.0
       picocolors: 1.0.0
       tslib: 2.6.2
+    dev: true
+
+  /@tsconfig/strictest@2.0.2:
+    resolution: {integrity: sha512-jt4jIsWKvUvuY6adJnQJlb/UR7DdjC8CjHI/OaSQruj2yX9/K6+KOvDt/vD6udqos/FUk5Op66CvYT7TBLYO5Q==}
     dev: true
 
   /@types/json-schema@7.0.15:
