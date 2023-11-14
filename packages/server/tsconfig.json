@@ -1,0 +1,4 @@
+{
+  "extends": "typescript-config/tsconfig.json",
+  "exclude": ["build/*"]
+}
