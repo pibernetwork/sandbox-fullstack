@@ -26,5 +26,8 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage"
   },
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": {
+    "inversify": "^6.0.2"
+  }
 }

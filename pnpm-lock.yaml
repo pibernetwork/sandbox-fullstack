@@ -58,6 +58,10 @@ importers:
         version: link:../prettier-config
 
   packages/library:
+    dependencies:
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
     devDependencies:
       '@types/node':
         specifier: ^20.9.0
@@ -2467,6 +2471,10 @@ packages:
       hasown: 2.0.0
       side-channel: 1.0.4
     dev: true
+
+  /inversify@6.0.2:
+    resolution: {integrity: sha512-i9m8j/7YIv4mDuYXUAcrpKPSaju/CIly9AHK5jvCBeoiM/2KEsuCQTTP+rzSWWpLYWRukdXFSl6ZTk2/uumbiA==}
+    dev: false
 
   /is-array-buffer@3.0.2:
     resolution: {integrity: sha512-y+FyyR/w8vfIRq4eQcM1EYgSTnmHXPqaF+IgzgraytCFq5Xh8lllDVmAZolPJiZttZLeFSINPYMaEJ7/vWUa1w==}
