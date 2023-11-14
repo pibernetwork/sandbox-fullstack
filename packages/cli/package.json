@@ -1,7 +1,10 @@
 {
   "author": "",
   "dependencies": {
-    "inversify": "^6.0.2"
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "inversify": "^6.0.2",
+    "table": "^6.8.1"
   },
   "description": "",
   "devDependencies": {
@@ -12,6 +15,7 @@
     "knip": "^2.41.2",
     "prettier-config": "workspace:^",
     "reflect-metadata": "^0.1.13",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2",
     "typescript-config": "workspace:^",
     "vitest": "^0.34.6",
@@ -23,6 +27,7 @@
   "name": "cli",
   "prettier": "prettier-config",
   "scripts": {
+    "bin": "ts-node-esm src/index.ts",
     "check": "tsc --noEmit",
     "format": "prettier --write ./src",
     "knip": "knip",

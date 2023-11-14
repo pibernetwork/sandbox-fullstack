@@ -1,18 +1,5 @@
-import DataServices from './containers/data-services.js';
-import container from './containers/inversify.config.js';
+import 'reflect-metadata';
 
-const { myClass } = new DataServices(container);
+import app from './commands/app.js';
 
-/* eslint-disable no-console */
-console.log(myClass.myValue);
-/* esline-enable no-console */
-
-interface TestA {
-  value: string;
-}
-
-const a: TestA = { value: '1234' };
-
-/* eslint-disable no-console */
-console.log(a);
-/* esline-enable no-console */
+app.parse();
