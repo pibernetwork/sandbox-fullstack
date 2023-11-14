@@ -57,13 +57,37 @@ importers:
         specifier: workspace:^
         version: link:../prettier-config
 
+  packages/library:
+    devDependencies:
+      '@types/node':
+        specifier: ^20.9.0
+        version: 20.9.0
+      reflect-metadata:
+        specifier: ^0.1.13
+        version: 0.1.13
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+      typescript-config:
+        specifier: workspace:*
+        version: link:../typescript-config
+      workspace:*:
+        specifier: link:typescript-config/workspace:*
+        version: link:typescript-config/workspace:*
+
   packages/prettier-config: {}
 
   packages/typescript-config:
     dependencies:
+      '@types/node':
+        specifier: ^20.9.0
+        version: 20.9.0
       prettier-config:
         specifier: workspace:^
         version: link:../prettier-config
+      reflect-metadata:
+        specifier: ^0.1.13
+        version: 0.1.13
     devDependencies:
       '@tsconfig/strictest':
         specifier: ^2.0.2
@@ -385,6 +409,11 @@ packages:
     dependencies:
       undici-types: 5.26.5
     dev: true
+
+  /@types/node@20.9.0:
+    resolution: {integrity: sha512-nekiGu2NDb1BcVofVcEKMIwzlx4NjHlcjhoxxKBNLtz15Y1z7MYf549DFvkHSId02Ax6kGwWntIBPC3l/JZcmw==}
+    dependencies:
+      undici-types: 5.26.5
 
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -2600,6 +2629,9 @@ packages:
       strip-indent: 3.0.0
     dev: true
 
+  /reflect-metadata@0.1.13:
+    resolution: {integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==}
+
   /regexp-tree@0.1.27:
     resolution: {integrity: sha512-iETxpjK6YoRWJG5o6hXLwvjYAoW+FEZn9os0PD/b6AP6xQwsa/Y7lCVgIixBbUPMfhu+i2LtdeAqVTgGlQarfA==}
     hasBin: true
@@ -3091,7 +3123,6 @@ packages:
 
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
-    dev: true
 
   /universalify@2.0.1:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
