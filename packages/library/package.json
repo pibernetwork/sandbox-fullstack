@@ -9,6 +9,7 @@
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@vitest/coverage-v8": "^0.34.6",
     "eslint-config-custom": "workspace:*",
+    "knip": "^2.41.2",
     "prettier-config": "workspace:^",
     "reflect-metadata": "^0.1.13",
     "typescript": "^5.2.2",
@@ -24,6 +25,7 @@
   "scripts": {
     "check": "tsc --noEmit",
     "format": "prettier --write ./src",
+    "knip": "knip",
     "lint": "eslint --ignore-path .gitignore ./src",
     "lint:fix": "eslint --ignore-path .gitignore ./src --fix",
     "test": "vitest run",
