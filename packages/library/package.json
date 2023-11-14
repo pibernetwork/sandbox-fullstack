@@ -3,18 +3,23 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^20.9.0",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "eslint-config-custom": "workspace:*",
+    "prettier-config": "workspace:^",
     "reflect-metadata": "^0.1.13",
     "typescript": "^5.2.2",
-    "typescript-config": "workspace:*",
-    "workspace:*": "link:typescript-config/workspace:*"
+    "typescript-config": "workspace:*"
   },
   "keywords": [],
   "license": "ISC",
   "main": "index.js",
   "name": "library",
+  "prettier": "prettier-config",
   "scripts": {
     "check": "tsc --noEmit",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "prettier --write ./src",
+    "lint": "eslint --ignore-path .gitignore ./src",
+    "lint:fix": "eslint --ignore-path .gitignore ./src --fix"
   },
   "version": "1.0.0"
 }

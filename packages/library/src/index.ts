@@ -2,7 +2,7 @@ interface TestA {
   value: string;
 }
 
-const a: TestA = { value: "1234" };
+const a: TestA = { value: '1234' };
 
 /* eslint-disable no-console */
 console.log(a);
