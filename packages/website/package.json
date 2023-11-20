@@ -26,7 +26,8 @@
     "vitest-mock-extended": "^1.3.1"
   },
   "lint-staged": {
-    "**/*.ts": "eslint"
+    "**/*.ts": "eslint",
+    "*.{js,ts}": "vitest related --run"
   },
   "name": "website",
   "private": true,

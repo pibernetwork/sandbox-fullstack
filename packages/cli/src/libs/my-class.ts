@@ -2,7 +2,7 @@ import { injectable } from 'inversify';
 
 @injectable()
 class MyClass {
-  myValue = 15;
+  myValue = 16;
 }
 
 export default MyClass;

@@ -24,7 +24,8 @@
   "keywords": [],
   "license": "ISC",
   "lint-staged": {
-    "**/*.ts": "eslint"
+    "**/*.ts": "eslint",
+    "*.{js,ts}": "vitest related --run"
   },
   "main": "index.js",
   "name": "cli",
