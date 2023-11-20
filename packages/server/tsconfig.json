@@ -1,4 +1,7 @@
 {
   "extends": "typescript-config/tsconfig.json",
-  "exclude": ["build/*"]
+  "exclude": ["build/*"],
+  "compilerOptions": {
+    "types": ["reflect-metadata", "node"]
+  }
 }

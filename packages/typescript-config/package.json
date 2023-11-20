@@ -1,11 +1,13 @@
 {
   "author": "",
   "dependencies": {
-    "@types/node": "^20.9.0",
-    "prettier-config": "workspace:^",
-    "reflect-metadata": "^0.1.13"
+    "prettier-config": "workspace:^"
   },
   "description": "",
+  "devDependencies": {
+    "@tsconfig/strictest": "^2.0.2",
+    "typescript": "^5.2.2"
+  },
   "keywords": [],
   "license": "ISC",
   "main": "index.js",
@@ -14,9 +16,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.0.0",
-  "devDependencies": {
-    "@tsconfig/strictest": "^2.0.2",
-    "typescript": "^5.2.2"
-  }
+  "version": "1.0.0"
 }
