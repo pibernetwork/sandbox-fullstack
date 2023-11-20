@@ -272,6 +272,9 @@ importers:
       eslint:
         specifier: ^8.28.0
         version: 8.53.0
+      eslint-config-custom:
+        specifier: workspace:^
+        version: link:../eslint-config-custom
       eslint-config-prettier:
         specifier: ^9.0.0
         version: 9.0.0(eslint@8.53.0)

@@ -5,6 +5,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:svelte/recommended',
     'prettier',
+    'custom',
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
@@ -12,12 +13,14 @@ module.exports = {
     sourceType: 'module',
     ecmaVersion: 2020,
     extraFileExtensions: ['.svelte'],
+    project: true,
   },
   env: {
     browser: true,
     es2017: true,
     node: true,
   },
+  ignorePatterns: ['.eslintrc.cjs', 'svelte.config.js', 'playwright.config.ts'],
   overrides: [
     {
       files: ['*.svelte'],

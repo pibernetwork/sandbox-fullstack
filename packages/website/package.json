@@ -6,6 +6,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.28.0",
+    "eslint-config-custom": "workspace:^",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-svelte": "^2.30.0",
     "prettier": "^3.0.0",
@@ -30,7 +31,7 @@
     "preview": "vite preview",
     "test": "npm run test:integration && npm run test:unit",
     "test:integration": "playwright test",
-    "test:unit": "vitest"
+    "test:unit": "vitest run"
   },
   "type": "module",
   "version": "0.0.1"
