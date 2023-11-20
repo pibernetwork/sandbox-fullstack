@@ -20,7 +20,12 @@ module.exports = {
     es2017: true,
     node: true,
   },
-  ignorePatterns: ['.eslintrc.cjs', 'svelte.config.js', 'playwright.config.ts'],
+  ignorePatterns: [
+    '.eslintrc.cjs',
+    'svelte.config.js',
+    'playwright.config.ts',
+    'setupTest.ts',
+  ],
   overrides: [
     {
       files: ['*.svelte'],
