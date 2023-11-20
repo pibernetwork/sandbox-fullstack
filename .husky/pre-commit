@@ -7,4 +7,4 @@ if [ "$BRANCH" = "main" ]; then
   exit 1;
 fi
 
-pnpm run lint-staged
+pnpm run lint-staged && pnpm run -r check
