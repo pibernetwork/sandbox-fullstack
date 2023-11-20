@@ -38,7 +38,7 @@
   "prettier": "prettier-config",
   "scripts": {
     "check": "tsc --noEmit",
-    "dev": "nodemon --esm src/dev.ts",
+    "dev": "nodemon --esm src/development.ts",
     "format": "prettier --write ./src",
     "knip": "knip",
     "lint": "eslint --ignore-path .gitignore ./src",
