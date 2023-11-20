@@ -306,8 +306,11 @@ importers:
         specifier: ^2.4.1
         version: 2.6.2
       typescript:
-        specifier: ^5.0.0
+        specifier: ^5.2.2
         version: 5.2.2
+      typescript-config:
+        specifier: workspace:^
+        version: link:../typescript-config
       vite:
         specifier: ^4.4.2
         version: 4.5.0(@types/node@18.18.8)

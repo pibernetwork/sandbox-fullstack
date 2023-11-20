@@ -1,5 +1,5 @@
 {
-  "extends": "./.svelte-kit/tsconfig.json",
+  "extends": ["./.svelte-kit/tsconfig.json", "typescript-config/tsconfig.json"],
   "compilerOptions": {
     "types": ["@testing-library/jest-dom"],
     "allowJs": true,
