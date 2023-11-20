@@ -33,6 +33,9 @@
   },
   "keywords": [],
   "license": "ISC",
+  "lint-staged": {
+    "**/*.ts": "eslint"
+  },
   "main": "index.js",
   "name": "server",
   "prettier": "prettier-config",

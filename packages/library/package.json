@@ -19,6 +19,9 @@
   },
   "keywords": [],
   "license": "ISC",
+  "lint-staged": {
+    "**/*.ts": "eslint"
+  },
   "main": "index.js",
   "name": "library",
   "prettier": "prettier-config",
