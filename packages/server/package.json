@@ -40,6 +40,7 @@
   "main": "index.js",
   "name": "server",
   "prettier": "prettier-config",
+  "private": true,
   "scripts": {
     "check": "tsc --noEmit",
     "dev": "nodemon --esm src/development.ts",
