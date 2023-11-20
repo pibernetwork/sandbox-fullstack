@@ -9,6 +9,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-svelte": "^2.30.0",
     "prettier": "^3.0.0",
+    "prettier-config": "workspace:^",
     "prettier-plugin-svelte": "^3.0.0",
     "svelte": "^4.0.5",
     "svelte-check": "^3.6.0",

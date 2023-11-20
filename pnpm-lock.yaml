@@ -281,6 +281,9 @@ importers:
       prettier:
         specifier: ^3.0.0
         version: 3.0.3
+      prettier-config:
+        specifier: workspace:^
+        version: link:../prettier-config
       prettier-plugin-svelte:
         specifier: ^3.0.0
         version: 3.1.0(prettier@3.0.3)(svelte@4.2.7)
