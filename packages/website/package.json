@@ -41,6 +41,7 @@
     "prepare": "svelte-kit sync",
     "preview": "vite preview",
     "test": "npm run test:integration && npm run test:unit",
+    "test:ci": "vitest run",
     "test:integration": "playwright test",
     "test:unit": "vitest run --coverage"
   },
