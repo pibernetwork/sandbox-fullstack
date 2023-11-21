@@ -1,5 +1,6 @@
 {
   "extends": "typescript-config/tsconfig.json",
+  "include": ["src", "api"],
   "exclude": ["build/*"],
   "compilerOptions": {
     "types": ["reflect-metadata", "node"],
