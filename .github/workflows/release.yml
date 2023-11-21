@@ -1,9 +1,10 @@
 name: Release
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+      - develop
 permissions: write-all
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
