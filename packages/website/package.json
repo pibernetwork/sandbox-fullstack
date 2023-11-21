@@ -38,6 +38,7 @@
     "dev": "vite dev",
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint .",
+    "prepare": "svelte-kit sync",
     "preview": "vite preview",
     "test": "npm run test:integration && npm run test:unit",
     "test:integration": "playwright test",

@@ -10,13 +10,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install pnpm
+      - name: PNPM
         uses: pnpm/action-setup@v2
         with:
           version: 8
-      - name: Install dependencies
-        run: pnpm install
-      - name: Run in all packages
+      - name: Dependencies
+        run: pnpm run -r install
+      - name: Prepare
         run: pnpm run -r lint
-      - name: Run check in all packages
+      - name: Lint
+        run: pnpm run -r lint
+      - name: Check
         run: pnpm run -r check
