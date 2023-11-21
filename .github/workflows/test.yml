@@ -29,11 +29,15 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Dependencies
         run: pnpm install
+      - name: Install Playwright Browsers
+        run: pnpx playwright install --with-deps
       - name: Prepare
         run: pnpm run -r prepare
+      - name: Integration test
+        run: pnpm run -r test:integration
       - name: Lint
         run: pnpm run -r lint
       - name: Check
         run: pnpm run -r check
-      - name: Check
+      - name: Unit test
         run: pnpm run -r test:ci
