@@ -1,0 +1,7 @@
+{
+  "$schema": "https://unpkg.com/knip@2/schema.json",
+  "entry": ["src/index.ts", "**/*.test.ts"],
+  "ignore": ["**/*mocks**"],
+  "ignoreDependencies": ["vitest-mock-extended", "@vitest/coverage-v8"],
+  "project": ["src/**/*.ts"]
+}

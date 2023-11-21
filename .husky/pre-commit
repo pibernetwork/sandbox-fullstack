@@ -6,3 +6,5 @@ if [ "$BRANCH" = "main" ]; then
   echo 'Commit on main is forbidden';
   exit 1;
 fi
+
+pnpm run lint-staged && pnpm run -r check
