@@ -1,0 +1,46 @@
+name: Test
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Dependencies
+        run: pnpm install
+      - name: Install Playwright Browsers
+        run: pnpx playwright install --with-deps
+      - name: Prepare
+        run: pnpm run -r prepare
+      - name: Integration test
+        run: pnpm run -r test:integration
+      - name: Lint
+        run: pnpm run -r lint
+      - name: Check
+        run: pnpm run -r check
+      - name: Unit test
+        run: pnpm run -r test:ci

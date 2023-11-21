@@ -1,0 +1,21 @@
+{
+  "author": "",
+  "dependencies": {
+    "prettier-config": "workspace:^"
+  },
+  "description": "",
+  "devDependencies": {
+    "@tsconfig/strictest": "^2.0.2",
+    "typescript": "^5.2.2"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "typescript-config",
+  "prettier": "prettier-config",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.0"
+}
