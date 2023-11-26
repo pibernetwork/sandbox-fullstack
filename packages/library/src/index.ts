@@ -1,10 +1,10 @@
 import DataServices from './containers/data-services.js';
 import container from './containers/inversify.config.js';
 
-const { myClass } = new DataServices(container);
+const { itemService } = new DataServices(container);
 
 /* eslint-disable no-console */
-console.log(myClass.myValue);
+console.log(itemService);
 
 interface TestA {
   value: string;
