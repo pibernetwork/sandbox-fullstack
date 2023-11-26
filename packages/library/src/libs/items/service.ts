@@ -8,7 +8,7 @@ import GenericService from '../../generics/service.js';
 
 @injectable()
 class ItemService extends GenericService<Item> {
-  constructor(@inject(TYPES.ItemService) userRepository: ItemRepository) {
+  constructor(@inject(TYPES.ItemRepository) userRepository: ItemRepository) {
     super(userRepository);
   }
 

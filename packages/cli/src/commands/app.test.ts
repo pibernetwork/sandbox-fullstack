@@ -7,5 +7,6 @@ describe('Program', () => {
     const names = app.commands.map((cmd) => cmd.name());
 
     expect(names).include('my-action');
+    expect(names).include('items:load');
   });
 });

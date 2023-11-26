@@ -35,9 +35,15 @@ importers:
       commander:
         specifier: ^11.1.0
         version: 11.1.0
+      dotenv:
+        specifier: ^16.3.1
+        version: 16.3.1
       inversify:
         specifier: ^6.0.2
         version: 6.0.2
+      library:
+        specifier: workspace:^
+        version: link:../library
       table:
         specifier: ^6.8.1
         version: 6.8.1
