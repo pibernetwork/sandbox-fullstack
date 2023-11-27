@@ -1,5 +1,11 @@
 # library
 
+## 0.2.0
+
+### Minor Changes
+
+- [#3](https://github.com/pibernetwork/sandbox-fullstack/pull/3) [`fafbc25`](https://github.com/pibernetwork/sandbox-fullstack/commit/fafbc2500a3e91c4d0e294daa9a1f9f73de8e4c6) Thanks [@mauriciopiber](https://github.com/mauriciopiber)! - Added first GraphQL crud functionality.
+
 ## 0.1.0
 
 ### Minor Changes
