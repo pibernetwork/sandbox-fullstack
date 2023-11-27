@@ -48,6 +48,9 @@ app.use(
   expressMiddleware(server, {
     context: async (): Promise<GraphQLContext> => {
       const services = new DataServices(container);
+
+      const { mongoDatabaseConnection } = services;
+      await mongoDatabaseConnection.init();
       return services;
     },
   }),

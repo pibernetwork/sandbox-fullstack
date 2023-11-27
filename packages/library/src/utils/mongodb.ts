@@ -65,7 +65,7 @@ class MongoDatabaseConnection implements Connection {
 
   async init() {
     if (this.connectionInstance) {
-      throw new Error('Only one instance of MongoDB is allowed');
+      return;
     }
 
     const client = new MongoClient(this.url, config);

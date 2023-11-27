@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { Resolvers } from '../../resolvers-types.js';
 
 export const typeDefs = gql.default`
   type Item {
@@ -11,3 +12,11 @@ export const typeDefs = gql.default`
     items: [Item]
   }
 `;
+
+export const resolvers: Resolvers = {
+  Query: {
+    items: (_, __, context) => {
+      return context.itemService.findAll();
+    },
+  },
+};

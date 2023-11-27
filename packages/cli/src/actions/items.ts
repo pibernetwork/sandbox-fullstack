@@ -7,7 +7,7 @@ const items = new Command('items:load');
 items.action(async () => {
   const { itemService } = new DataServices(container);
 
-  const response = await itemService.insertMany([{ name: 'My Name' }]);
+  const response = await itemService.insertOne({ name: 'My Name' });
 
   /* eslint-disable no-console */
   console.log(response);

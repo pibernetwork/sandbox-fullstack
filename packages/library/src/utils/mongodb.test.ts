@@ -55,14 +55,12 @@ describe('MongoDB connection', () => {
     );
   });
 
-  test('MongoDB - Try to init twice cause error', async () => {
+  test('MongoDB - Try to init twice return single connection', async () => {
     // run
     const mongoDatabase = new MongoDatabaseConnection();
 
     await mongoDatabase.init();
-    await expect(() => mongoDatabase.init()).rejects.toThrow(
-      /Only one instance/,
-    );
+    await expect(() => mongoDatabase.init()).not.toThrow();
   });
 
   test('MongoDB - Init a connection', async () => {

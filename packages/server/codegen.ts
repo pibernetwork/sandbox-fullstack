@@ -7,6 +7,9 @@ const config: CodegenConfig = {
       config: {
         useIndexSignature: true,
         contextType: './graphql/types.js#GraphQLContext',
+        mappers: {
+          Item: 'library/src/libs/items/types.js#ItemWithId',
+        },
       },
       plugins: ['typescript', 'typescript-resolvers'],
     },
