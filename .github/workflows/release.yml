@@ -21,7 +21,11 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-
+      - name: Setup environments variables
+        run: |
+          touch .env
+          echo MONGODB_CONNECTION=${{ secrets.MONGODB_CONNECTION }} >> .env
+          echo MONGODB_DATABASE=${{ secrets.MONGODB_DATABASE }} >> .env
       - name: Create Release Pull Request
         uses: changesets/action@v1
         with:
