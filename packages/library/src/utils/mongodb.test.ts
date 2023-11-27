@@ -15,8 +15,8 @@ vi.mock('mongodb', () => {
 
 describe('MongoDB connection', () => {
   beforeEach(() => {
-    vi.stubEnv('DB_CONNECTION_STRING', 'mongodb://127.0.0.1:27017');
-    vi.stubEnv('DB_DATABASE', 'sandbox-mock');
+    vi.stubEnv('MONGODB_CONNECTION', 'mongodb://127.0.0.1:27017');
+    vi.stubEnv('MONGODB_DATABASE', 'sandbox-mock');
 
     mockReset(mongoClientMock);
   });
@@ -27,20 +27,22 @@ describe('MongoDB connection', () => {
     expect(mongoDatabase).instanceOf(MongoDatabaseConnection);
   });
 
-  test('MongoDB - Instance without DB_CONNECTION_STRING', async () => {
+  test('MongoDB - Instance without MONGODB_CONNECTION', async () => {
     // setup
-    vi.stubEnv('DB_CONNECTION_STRING', '');
+    vi.stubEnv('MONGODB_CONNECTION', '');
 
     expect(() => new MongoDatabaseConnection()).toThrow(
-      /Missing DB_CONNECTION_STRING/,
+      /Missing MONGODB_CONNECTION/,
     );
   });
 
-  test('MongoDB - Instance without DB_DATABASE', async () => {
+  test('MongoDB - Instance without MONGODB_DATABASE', async () => {
     // setup
-    vi.stubEnv('DB_DATABASE', '');
+    vi.stubEnv('MONGODB_DATABASE', '');
 
-    expect(() => new MongoDatabaseConnection()).toThrow(/Missing DB_DATABASE/);
+    expect(() => new MongoDatabaseConnection()).toThrow(
+      /Missing MONGODB_DATABASE/,
+    );
   });
 
   test('MongoDB - Try to use before initiate cause error', async () => {

@@ -1,10 +1,15 @@
 import dotenv from 'dotenv';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+dotenv.config({ path: `${__dirname}/../../../../.env` });
+
 import { injectable } from 'inversify';
 import { Collection, Document, MongoClient } from 'mongodb';
 
 import { Connection } from './types.js';
-
-dotenv.config();
 
 const config = {
   connectTimeoutMS: 5000,
@@ -19,18 +24,18 @@ class MongoDatabaseConnection implements Connection {
   url: string;
 
   constructor() {
-    const DB_CONNECTION_STRING = process.env['DB_CONNECTION_STRING'];
-    if (!DB_CONNECTION_STRING) {
-      throw new Error('Missing DB_CONNECTION_STRING');
+    const mongoConnection = process.env['MONGODB_CONNECTION'];
+    if (!mongoConnection) {
+      throw new Error('Missing MONGODB_CONNECTION');
     }
-    this.url = DB_CONNECTION_STRING;
+    this.url = mongoConnection;
 
-    const DB_DATABASE = process.env['DB_DATABASE'];
-    if (!DB_DATABASE) {
-      throw new Error('Missing DB_DATABASE');
+    const databaseDatabase = process.env['MONGODB_DATABASE'];
+    if (!databaseDatabase) {
+      throw new Error('Missing MONGODB_DATABASE');
     }
 
-    this.database = DB_DATABASE;
+    this.database = databaseDatabase;
   }
 
   async close(): Promise<void> {

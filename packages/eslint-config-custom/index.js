@@ -73,7 +73,8 @@ module.exports = {
         },
       },
     ],
-
+    // perfecionist
+    'perfectionist/sort-imports': ['off'],
     // perfecionist
     'perfectionist/sort-objects': [
       'error',

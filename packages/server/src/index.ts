@@ -1,33 +1,25 @@
+import 'reflect-metadata';
+
+import dotenv from 'dotenv';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: `${__dirname}/../../.env` });
+
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import dotenv from 'dotenv';
+
 import express from 'express';
-import gql from 'graphql-tag';
+import DataServices from 'library/src/containers/data-services.js';
+import container from 'library/src/containers/inversify.config.js';
 import http from 'node:http';
-import 'reflect-metadata';
 
-import DataServices from './containers/data-services.js';
-import container from './containers/inversify.config.js';
-import { Resolvers } from './resolvers-types.js';
-
-dotenv.config();
-
-const { myClass } = new DataServices(container);
-
-const typeDefs = gql.default`
-  type Query {
-    hello: String
-  }
-`;
-
-const resolvers: Resolvers = {
-  Query: {
-    hello: () => myClass.myValue.toString(),
-  },
-};
+import { resolvers, typeDefs } from './graphql/index.js';
+import { GraphQLContext } from './graphql/types.js';
 
 const { json } = bodyParser;
 
@@ -53,7 +45,12 @@ app.use(
   '/graphql',
   cors<cors.CorsRequest>(),
   json(),
-  expressMiddleware(server),
+  expressMiddleware(server, {
+    context: async (): Promise<GraphQLContext> => {
+      const services = new DataServices(container);
+      return services;
+    },
+  }),
 );
 
 export default httpServer;
