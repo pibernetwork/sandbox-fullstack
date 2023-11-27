@@ -37,6 +37,12 @@ export type Item = {
   name?: Maybe<Scalars['String']['output']>;
 };
 
+export type ItemConnection = {
+  __typename?: 'ItemConnection';
+  nodes?: Maybe<Array<Item>>;
+  pageInfo: PageInfo;
+};
+
 export type ItemResponse = {
   __typename?: 'ItemResponse';
   errors?: Maybe<Array<FormError>>;
@@ -84,11 +90,20 @@ export type Query = {
   hello?: Maybe<Scalars['String']['output']>;
   item: Item;
   items?: Maybe<Array<Maybe<Item>>>;
+  itemsConnection: ItemConnection;
 };
 
 
 export type QueryItemArgs = {
   _id: Scalars['String']['input'];
+};
+
+
+export type QueryItemsConnectionArgs = {
+  limit: Scalars['Int']['input'];
+  page: Scalars['Int']['input'];
+  sortBy: Scalars['String']['input'];
+  sortOrder: Scalars['String']['input'];
 };
 
 export type SelectOption = {
@@ -175,6 +190,7 @@ export type ResolversTypes = ResolversObject<{
   FormError: ResolverTypeWrapper<FormError>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Item: ResolverTypeWrapper<ItemWithId>;
+  ItemConnection: ResolverTypeWrapper<Omit<ItemConnection, 'nodes'> & { nodes?: Maybe<Array<ResolversTypes['Item']>> }>;
   ItemResponse: ResolverTypeWrapper<Omit<ItemResponse, 'node'> & { node?: Maybe<ResolversTypes['Item']> }>;
   Mutation: ResolverTypeWrapper<{}>;
   PageInfo: ResolverTypeWrapper<PageInfo>;
@@ -191,6 +207,7 @@ export type ResolversParentTypes = ResolversObject<{
   FormError: FormError;
   Int: Scalars['Int']['output'];
   Item: ItemWithId;
+  ItemConnection: Omit<ItemConnection, 'nodes'> & { nodes?: Maybe<Array<ResolversParentTypes['Item']>> };
   ItemResponse: Omit<ItemResponse, 'node'> & { node?: Maybe<ResolversParentTypes['Item']> };
   Mutation: {};
   PageInfo: PageInfo;
@@ -209,6 +226,12 @@ export type FormErrorResolvers<ContextType = GraphQLContext, ParentType extends 
 export type ItemResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Item'] = ResolversParentTypes['Item']> = ResolversObject<{
   _id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ItemConnectionResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['ItemConnection'] = ResolversParentTypes['ItemConnection']> = ResolversObject<{
+  nodes?: Resolver<Maybe<Array<ResolversTypes['Item']>>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -241,6 +264,7 @@ export type QueryResolvers<ContextType = GraphQLContext, ParentType extends Reso
   hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   item?: Resolver<ResolversTypes['Item'], ParentType, ContextType, RequireFields<QueryItemArgs, '_id'>>;
   items?: Resolver<Maybe<Array<Maybe<ResolversTypes['Item']>>>, ParentType, ContextType>;
+  itemsConnection?: Resolver<ResolversTypes['ItemConnection'], ParentType, ContextType, RequireFields<QueryItemsConnectionArgs, 'limit' | 'page' | 'sortBy' | 'sortOrder'>>;
 }>;
 
 export type SelectOptionResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['SelectOption'] = ResolversParentTypes['SelectOption']> = ResolversObject<{
@@ -252,6 +276,7 @@ export type SelectOptionResolvers<ContextType = GraphQLContext, ParentType exten
 export type Resolvers<ContextType = GraphQLContext> = ResolversObject<{
   FormError?: FormErrorResolvers<ContextType>;
   Item?: ItemResolvers<ContextType>;
+  ItemConnection?: ItemConnectionResolvers<ContextType>;
   ItemResponse?: ItemResponseResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   PageInfo?: PageInfoResolvers<ContextType>;

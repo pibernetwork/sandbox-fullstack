@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import { assert, describe, expect, test } from 'vitest';
 
+import { MongoDatabaseServiceConnectionPageInfo } from 'library/src/generics/types.js';
 import ItemService from 'library/src/libs/items/service.js';
 import { ItemWithId } from 'library/src/libs/items/types.js';
 import { mock } from 'vitest-mock-extended';
@@ -66,6 +67,35 @@ describe('Items queries and mutations', () => {
     const item = response.body.singleResult.data?.['item'] as ItemWithId;
 
     expect(item._id).toBe(mockItem._id);
+  });
+
+  test('Query Connection', async () => {
+    itemService.findAllConnection.mockResolvedValue({
+      nodes: mockValues,
+      pageInfo: mock<MongoDatabaseServiceConnectionPageInfo>(),
+    });
+
+    contextValue.itemService = itemService;
+
+    const QUERY = gql.default`
+      query {
+        itemsConnection(page: 1, limit: 20, sortBy: "name", sortOrder: "desc") {
+            nodes {
+                _id
+                name
+            }
+
+        }
+      }
+    `;
+
+    // run
+    const response = await runTestQuery(QUERY, {}, contextValue);
+
+    // assert
+    assert(response.body.kind === 'single');
+    expect(response.body.singleResult.errors).toBeUndefined();
+    expect(response.body.singleResult.data?.['itemsConnection']).toBeDefined();
   });
 
   test('Add item', async () => {

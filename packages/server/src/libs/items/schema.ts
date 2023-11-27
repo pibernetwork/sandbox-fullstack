@@ -1,4 +1,6 @@
 import gql from 'graphql-tag';
+import { MongoDatabaseServiceFindOptions } from 'library/src/generics/types.js';
+import { Item } from 'library/src/libs/items/types.js';
 import { Resolvers } from '../../resolvers-types.js';
 
 export const typeDefs = gql.default`
@@ -7,15 +9,21 @@ export const typeDefs = gql.default`
     name: String
   }
 
-  type Query {
-    item(_id: String!): Item!
-    items: [Item]
-  }
-
-
   type ItemResponse {
     node: Item
     errors: [FormError!]
+  }
+
+
+  type ItemConnection {
+    nodes: [Item!]
+    pageInfo: PageInfo!
+  }
+
+  type Query {
+    item(_id: String!): Item!
+    items: [Item]
+    itemsConnection(page: Int!, limit: Int!, sortBy: String!, sortOrder: String!): ItemConnection!
   }
 
   type Mutation {
@@ -45,6 +53,17 @@ export const resolvers: Resolvers = {
     },
     items: (_, __, context) => {
       return context.itemService.findAll();
+    },
+    itemsConnection: (_, args, context) => {
+      const options: MongoDatabaseServiceFindOptions<Item> = {
+        filters: {},
+        page: args.page,
+        perPage: args.limit,
+        sortBy: args.sortBy as keyof Item,
+        sortDirection: args.sortOrder as 'asc' | 'desc',
+      };
+
+      return context.itemService.findAllConnection(options);
     },
   },
 };
