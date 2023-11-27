@@ -20,6 +20,7 @@ export const typeDefs = gql.default`
 
   type Mutation {
     addItem(name: String!): ItemResponse!
+    editItem(_id: String! name: String!): ItemResponse!
   }
 `;
 
@@ -27,6 +28,10 @@ export const resolvers: Resolvers = {
   Mutation: {
     addItem: (_, args, context) => {
       return context.itemService.insertOne(args);
+    },
+    editItem: (_, args, context) => {
+      const { _id, ...rest } = args;
+      return context.itemService.updateOne(_id, rest);
     },
   },
   Query: {
