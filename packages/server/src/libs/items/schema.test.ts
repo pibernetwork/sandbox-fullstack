@@ -67,4 +67,34 @@ describe('Items queries and mutations', () => {
 
     expect(item._id).toBe(mockItem._id);
   });
+
+  test('Add item', async () => {
+    itemService.insertOne.mockResolvedValue({ errors: [], node: mockItem });
+
+    contextValue.itemService = itemService;
+
+    const QUERY = gql.default`
+    mutation {
+      addItem(name: "Name") {
+        node {
+          _id
+          name
+        }
+        errors {
+          key
+          type
+          message
+        }
+      }
+    }
+  `;
+
+    // run
+    const response = await runTestQuery(QUERY, {}, contextValue);
+
+    // assert
+    assert(response.body.kind === 'single');
+    expect(response.body.singleResult.errors).toBeUndefined();
+    expect(response.body.singleResult.data?.['addItem']).toBeDefined();
+  });
 });

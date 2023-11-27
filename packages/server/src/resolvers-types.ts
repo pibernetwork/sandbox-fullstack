@@ -8,6 +8,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -18,10 +19,51 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type FilterBetween = {
+  from?: InputMaybe<Scalars['Float']['input']>;
+  to?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type FormError = {
+  __typename?: 'FormError';
+  key: Scalars['String']['output'];
+  message: Scalars['String']['output'];
+  type: Scalars['String']['output'];
+};
+
 export type Item = {
   __typename?: 'Item';
   _id: Scalars['String']['output'];
   name?: Maybe<Scalars['String']['output']>;
+};
+
+export type ItemResponse = {
+  __typename?: 'ItemResponse';
+  errors?: Maybe<Array<FormError>>;
+  node?: Maybe<Item>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  addItem: ItemResponse;
+};
+
+
+export type MutationAddItemArgs = {
+  name: Scalars['String']['input'];
+};
+
+export type PageInfo = {
+  __typename?: 'PageInfo';
+  end: Scalars['Int']['output'];
+  hasNextPage: Scalars['Boolean']['output'];
+  hasPrevPage: Scalars['Boolean']['output'];
+  nextPage?: Maybe<Scalars['Int']['output']>;
+  page: Scalars['Int']['output'];
+  prevPage?: Maybe<Scalars['Int']['output']>;
+  start: Scalars['Int']['output'];
+  totalNodes: Scalars['Int']['output'];
+  totalPages: Scalars['Int']['output'];
 };
 
 export type Query = {
@@ -34,6 +76,12 @@ export type Query = {
 
 export type QueryItemArgs = {
   _id: Scalars['String']['input'];
+};
+
+export type SelectOption = {
+  __typename?: 'SelectOption';
+  name: Scalars['String']['output'];
+  value: Scalars['String']['output'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -109,22 +157,68 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  FilterBetween: FilterBetween;
+  Float: ResolverTypeWrapper<Scalars['Float']['output']>;
+  FormError: ResolverTypeWrapper<FormError>;
+  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Item: ResolverTypeWrapper<ItemWithId>;
+  ItemResponse: ResolverTypeWrapper<Omit<ItemResponse, 'node'> & { node?: Maybe<ResolversTypes['Item']> }>;
+  Mutation: ResolverTypeWrapper<{}>;
+  PageInfo: ResolverTypeWrapper<PageInfo>;
   Query: ResolverTypeWrapper<{}>;
+  SelectOption: ResolverTypeWrapper<SelectOption>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   Boolean: Scalars['Boolean']['output'];
+  FilterBetween: FilterBetween;
+  Float: Scalars['Float']['output'];
+  FormError: FormError;
+  Int: Scalars['Int']['output'];
   Item: ItemWithId;
+  ItemResponse: Omit<ItemResponse, 'node'> & { node?: Maybe<ResolversParentTypes['Item']> };
+  Mutation: {};
+  PageInfo: PageInfo;
   Query: {};
+  SelectOption: SelectOption;
   String: Scalars['String']['output'];
+}>;
+
+export type FormErrorResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['FormError'] = ResolversParentTypes['FormError']> = ResolversObject<{
+  key?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type ItemResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Item'] = ResolversParentTypes['Item']> = ResolversObject<{
   _id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ItemResponseResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['ItemResponse'] = ResolversParentTypes['ItemResponse']> = ResolversObject<{
+  errors?: Resolver<Maybe<Array<ResolversTypes['FormError']>>, ParentType, ContextType>;
+  node?: Resolver<Maybe<ResolversTypes['Item']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type MutationResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  addItem?: Resolver<ResolversTypes['ItemResponse'], ParentType, ContextType, RequireFields<MutationAddItemArgs, 'name'>>;
+}>;
+
+export type PageInfoResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['PageInfo'] = ResolversParentTypes['PageInfo']> = ResolversObject<{
+  end?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  hasNextPage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  hasPrevPage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  nextPage?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  page?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  prevPage?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  start?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  totalNodes?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  totalPages?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -134,8 +228,19 @@ export type QueryResolvers<ContextType = GraphQLContext, ParentType extends Reso
   items?: Resolver<Maybe<Array<Maybe<ResolversTypes['Item']>>>, ParentType, ContextType>;
 }>;
 
+export type SelectOptionResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['SelectOption'] = ResolversParentTypes['SelectOption']> = ResolversObject<{
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  value?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type Resolvers<ContextType = GraphQLContext> = ResolversObject<{
+  FormError?: FormErrorResolvers<ContextType>;
   Item?: ItemResolvers<ContextType>;
+  ItemResponse?: ItemResponseResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
+  PageInfo?: PageInfoResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  SelectOption?: SelectOptionResolvers<ContextType>;
 }>;
 
