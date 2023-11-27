@@ -10,14 +10,16 @@ describe('Items queries and mutations', () => {
   const contextValue = mockContext();
   const itemService = mock<ItemService>();
 
-  const mockValues = [mock<ItemWithId>({ _id: '12345', name: 'my name' })];
+  const mockItem = mock<ItemWithId>({ _id: '12345', name: 'my name' });
+
+  const mockValues = [mockItem];
 
   test('Query All', async () => {
     itemService.findAll.mockResolvedValue(mockValues);
 
     contextValue.itemService = itemService;
 
-    const GET_QUERY = gql.default`
+    const QUERY = gql.default`
       query GetAllItems {
         items {
           _id
@@ -27,7 +29,7 @@ describe('Items queries and mutations', () => {
     `;
 
     // run
-    const response = await runTestQuery(GET_QUERY, {}, contextValue);
+    const response = await runTestQuery(QUERY, {}, contextValue);
 
     // assert
     assert(response.body.kind === 'single');
@@ -37,5 +39,32 @@ describe('Items queries and mutations', () => {
     const items = response.body.singleResult.data?.['items'] as ItemWithId[];
 
     expect(items[0]?._id).toBe(mockValues[0]?._id);
+  });
+
+  test('Query One', async () => {
+    itemService.findOne.mockResolvedValue(mockItem);
+
+    contextValue.itemService = itemService;
+
+    const QUERY = gql.default`
+      query GetAllItems {
+        item(_id: "12345") {
+          _id
+          name
+        }
+      }
+    `;
+
+    // run
+    const response = await runTestQuery(QUERY, {}, contextValue);
+
+    // assert
+    assert(response.body.kind === 'single');
+    expect(response.body.singleResult.errors).toBeUndefined();
+    expect(response.body.singleResult.data?.['item']).toBeDefined();
+
+    const item = response.body.singleResult.data?.['item'] as ItemWithId;
+
+    expect(item._id).toBe(mockItem._id);
   });
 });

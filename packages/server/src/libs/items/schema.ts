@@ -15,6 +15,9 @@ export const typeDefs = gql.default`
 
 export const resolvers: Resolvers = {
   Query: {
+    item: (_, args, context) => {
+      return context.itemService.findOne(args._id);
+    },
     items: (_, __, context) => {
       return context.itemService.findAll();
     },
