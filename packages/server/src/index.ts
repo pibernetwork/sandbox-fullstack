@@ -11,6 +11,7 @@ import 'reflect-metadata';
 
 import DataServices from './containers/data-services.js';
 import container from './containers/inversify.config.js';
+import { Resolvers } from './resolvers-types.js';
 
 dotenv.config();
 
@@ -22,9 +23,9 @@ const typeDefs = gql.default`
   }
 `;
 
-const resolvers = {
+const resolvers: Resolvers = {
   Query: {
-    hello: () => myClass.myValue,
+    hello: () => myClass.myValue.toString(),
   },
 };
 
