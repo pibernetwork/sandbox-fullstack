@@ -9,7 +9,12 @@ module.exports = {
   plugins: ['simple-import-sort', 'boundaries'],
   extends: ['custom'],
 
-  ignorePatterns: ['build/', '.eslintrc.cjs'],
+  ignorePatterns: [
+    'build/',
+    '.eslintrc.cjs',
+    'codegen.ts',
+    'src/resolvers-types.ts',
+  ],
   settings: {
     'import/resolver': {
       typescript: {

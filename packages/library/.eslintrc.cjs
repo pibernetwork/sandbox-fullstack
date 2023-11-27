@@ -1,20 +1,23 @@
 module.exports = {
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
     project: true,
     tsconfigRootDir: __dirname,
   },
 
-  extends: ["custom"],
+  extends: ['custom'],
 
-  ignorePatterns: ["build/", ".eslintrc.cjs"],
+  ignorePatterns: ['build/', '.eslintrc.cjs'],
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       typescript: {
         alwaysTryTypes: true,
       },
     },
+  },
+  rules: {
+    complexity: [2, 10],
   },
 };

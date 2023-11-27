@@ -34,6 +34,11 @@ jobs:
         run: pnpm install
       - name: Install Playwright Browsers
         run: pnpx playwright install --with-deps
+      - name: Setup environments variables
+        run: |
+          touch .env
+          echo MONGODB_CONNECTION=${{ secrets.MONGODB_CONNECTION }} >> .env
+          echo MONGODB_DATABASE=${{ secrets.MONGODB_DATABASE }} >> .env
       - name: Prepare
         run: pnpm run -r prepare
       - name: Integration test

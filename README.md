@@ -23,6 +23,8 @@ first on sandbox-fullstack before shiping to production.
 
 Apply and get a more detail comprehesion of the facto standard for web development.
 
+Easy and fast to develop.
+
 ## Limits
 
 It should not be used as a end project.
