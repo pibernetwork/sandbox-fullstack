@@ -46,12 +46,18 @@ export type ItemResponse = {
 export type Mutation = {
   __typename?: 'Mutation';
   addItem: ItemResponse;
+  delItem: Scalars['Boolean']['output'];
   editItem: ItemResponse;
 };
 
 
 export type MutationAddItemArgs = {
   name: Scalars['String']['input'];
+};
+
+
+export type MutationDelItemArgs = {
+  _id: Scalars['String']['input'];
 };
 
 
@@ -214,6 +220,7 @@ export type ItemResponseResolvers<ContextType = GraphQLContext, ParentType exten
 
 export type MutationResolvers<ContextType = GraphQLContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   addItem?: Resolver<ResolversTypes['ItemResponse'], ParentType, ContextType, RequireFields<MutationAddItemArgs, 'name'>>;
+  delItem?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDelItemArgs, '_id'>>;
   editItem?: Resolver<ResolversTypes['ItemResponse'], ParentType, ContextType, RequireFields<MutationEditItemArgs, '_id' | 'name'>>;
 }>;
 

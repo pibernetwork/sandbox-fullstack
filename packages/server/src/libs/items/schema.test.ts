@@ -127,4 +127,24 @@ describe('Items queries and mutations', () => {
     expect(response.body.singleResult.errors).toBeUndefined();
     expect(response.body.singleResult.data?.['editItem']).toBeDefined();
   });
+
+  test('Delete item', async () => {
+    itemService.deleteOne.mockResolvedValue(true);
+
+    contextValue.itemService = itemService;
+
+    const QUERY = gql.default`
+    mutation {
+      delItem(_id: "12345")
+    }
+  `;
+
+    // run
+    const response = await runTestQuery(QUERY, {}, contextValue);
+
+    // assert
+    assert(response.body.kind === 'single');
+    expect(response.body.singleResult.errors).toBeUndefined();
+    expect(response.body.singleResult.data?.['delItem']).toBeDefined();
+  });
 });
