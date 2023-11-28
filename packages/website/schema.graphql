@@ -1,0 +1,55 @@
+input FilterBetween {
+  from: Float
+  to: Float
+}
+
+type FormError {
+  key: String!
+  message: String!
+  type: String!
+}
+
+type Item {
+  _id: String!
+  name: String
+}
+
+type ItemConnection {
+  nodes: [Item!]
+  pageInfo: PageInfo!
+}
+
+type ItemResponse {
+  errors: [FormError!]
+  node: Item
+}
+
+type Mutation {
+  addItem(name: String!): ItemResponse!
+  delItem(_id: String!): Boolean!
+  editItem(_id: String!, name: String!): ItemResponse!
+}
+
+type PageInfo {
+  end: Int!
+  hasNextPage: Boolean!
+  hasPrevPage: Boolean!
+  nextPage: Int
+  page: Int!
+  prevPage: Int
+  start: Int!
+  totalNodes: Int!
+  totalPages: Int!
+}
+
+type Query {
+  hello: String
+  item(_id: String!): Item!
+  items: [Item]
+  itemsConnection(limit: Int!, page: Int!, sortBy: String!, sortOrder: String!): ItemConnection!
+}
+
+type SelectOption {
+  name: String!
+  value: String!
+}

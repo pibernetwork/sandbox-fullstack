@@ -1,12 +1,13 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vitest/config';
+import houdini from 'houdini/vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   define: {
     // Eliminate in-source test code
     'import.meta.vitest': 'undefined',
   },
-  plugins: [sveltekit()],
+  plugins: [houdini(), sveltekit()],
   test: {
     coverage: {
       all: true,
@@ -23,6 +24,8 @@ export default defineConfig({
         '.prettierrc.mjs',
         'playwright.config.ts',
         'svelte.config.js',
+        '$houdini',
+        'houdini.config.js',
       ],
       functions: 100,
       lines: 100,
