@@ -3,24 +3,37 @@
 
   $: store = graphql(`
     query GetItems @load {
-      items {
-        _id
-        name
+      itemsConnection(page: 1, limit: 20, sortBy: "name", sortOrder: "desc") {
+        nodes @list(name: "All_Items") {
+          _id
+          name
+        }
+        pageInfo {
+          totalPages
+          totalNodes
+        }
       }
     }
   `);
 </script>
 
-<h2>Items - Display items</h2>
-
-<p>Errors</p>
-{#if $store?.data?.items}
-  <p>
-    {#each $store?.data?.items as item}
-      {#if item}
-        <p>{item.name}</p>
-      {/if}
-    {/each}
-  </p>
-{/if}
-<p>Details</p>
+<p>List</p>
+<div class="p-2">
+  {#if $store?.data?.itemsConnection.nodes}
+    <div class="grid grid-cols-1 gap-2">
+      {#each $store?.data?.itemsConnection.nodes as item}
+        {#if item}
+          <div class="flex">
+            <div>{item.name}</div>
+            <div><a class="m-2" href={`/items/edit/${item._id}`}>Edit</a></div>
+            <div><a class="m-2" href={`/items/del/${item._id}`}>Del</a></div>
+            <div><a class="m-2" href={`/items/view/${item._id}`}>View</a></div>
+          </div>
+        {/if}
+      {/each}
+    </div>
+    <div>
+      Page {$store?.data?.itemsConnection.pageInfo?.totalNodes}
+    </div>
+  {/if}
+</div>

@@ -3,4 +3,5 @@
 </script>
 
 <h1>Items</h1>
+<a href="/items/add">Add</a>
 <Table />

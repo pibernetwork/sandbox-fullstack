@@ -24,6 +24,7 @@ module.exports = {
     '.eslintrc.cjs',
     'svelte.config.js',
     'playwright.config.ts',
+    'tailwing.config.js',
     'setupTest.ts',
   ],
   overrides: [
@@ -35,4 +36,65 @@ module.exports = {
       },
     },
   ],
+  rules: {
+    'func-style': 'off',
+    'etc/throw-error': 'off',
+    'no-inner-declarations': 'off',
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: ['class', 'enum', 'interface', 'typeAlias', 'typeParameter'],
+        format: ['PascalCase'],
+        leadingUnderscore: 'forbid',
+      },
+      {
+        selector: [
+          'accessor',
+          'classMethod',
+          'classProperty',
+          'function',
+          'parameterProperty',
+          'typeMethod',
+          'typeProperty',
+          // 'objectLiteralMethod', // check more in detail
+          // 'objectLiteralProperty', this one cause errors with 0 index on objects.
+        ],
+        format: ['camelCase'],
+      },
+      {
+        selector: ['enumMember'],
+        format: ['UPPER_CASE'],
+      },
+      {
+        selector: ['parameter'],
+        format: ['camelCase'],
+        leadingUnderscore: 'allowSingleOrDouble',
+      },
+
+      {
+        selector: ['variable'],
+        format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+        leadingUnderscore: 'allowSingleOrDouble',
+      },
+      {
+        selector: ['variable'],
+        format: ['camelCase'],
+        leadingUnderscore: 'allow',
+      },
+      {
+        selector: ['variable', 'parameter'],
+        types: ['boolean'],
+        format: ['PascalCase'],
+        prefix: ['is', 'should', 'has', 'can', 'did', 'will'],
+      },
+      {
+        selector: 'interface',
+        format: ['PascalCase'],
+        custom: {
+          regex: '^I[A-Z]',
+          match: false,
+        },
+      },
+    ],
+  },
 };

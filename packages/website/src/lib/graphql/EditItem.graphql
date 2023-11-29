@@ -1,0 +1,13 @@
+mutation EditItem($id: String!, $name: String!) {
+  editItem(_id: $id, name: $name) {
+    node {
+      _id
+      name
+    }
+    errors {
+      key
+      type
+      message
+    }
+  }
+}

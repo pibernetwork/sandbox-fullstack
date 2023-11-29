@@ -15,6 +15,7 @@ export default defineConfig({
       exclude: [
         '.svelte-kit',
         '**/*types.ts',
+        '**/*svelte',
         'src/types/index.ts',
         'src/*.ts',
         'codegen.ts',
