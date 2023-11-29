@@ -2,8 +2,8 @@
   import { graphql } from '$houdini';
 
   $: store = graphql(`
-    query GetItems @load {
-      itemsConnection(page: 1, limit: 20, sortBy: "name", sortOrder: "desc") {
+    query GetItems @load @cache(policy: NetworkOnly) {
+      itemsConnection(page: 1, limit: 200, sortBy: "name", sortOrder: "desc") {
         nodes @list(name: "All_Items") {
           _id
           name

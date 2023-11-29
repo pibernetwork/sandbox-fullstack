@@ -24,7 +24,7 @@
   {JSON.stringify(data)}
 </pre>
 
-{#if form?.data?.addItem.node}
+{#if form?.data?.addItem?.node}
   Item added to server
 {/if}
 <a href="/items">Back</a>

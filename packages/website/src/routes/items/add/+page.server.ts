@@ -1,5 +1,5 @@
 import { graphql } from '$houdini';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 
 /* @type { import('./$types').Actions } */
 export const actions = {
@@ -18,7 +18,6 @@ export const actions = {
           node {
             _id
             name
-            ...All_Items_insert
           }
           errors {
             key
@@ -28,6 +27,12 @@ export const actions = {
       }
     `);
 
-    return await editMutation.mutate({ name }, { event });
+    const response = await editMutation.mutate({ name }, { event });
+
+    if (response?.data?.addItem) {
+      throw redirect(303, '/items');
+    }
+
+    return response;
   },
 };
