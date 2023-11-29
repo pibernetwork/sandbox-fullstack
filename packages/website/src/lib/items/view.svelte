@@ -18,16 +18,15 @@
   `);
 </script>
 
-{#if $store?.data?.item}
-  <div>{$store?.data?.item._id}</div>
-  <div>{$store?.data?.item.name}</div>
-  <div>
-    <a class="m-2" href={`/items/edit/${$store?.data?.item._id}`}>Edit</a>
-  </div>
-  <div>
-    <a class="m-2" href={`/items/del/${$store?.data?.item._id}`}>Del</a>
-  </div>
-  <div>
-    <a class="m-2" href={`/items/view/${$store?.data?.item._id}`}>View</a>
-  </div>
-{/if}
+<div class="m-2">
+  {#if $store?.data?.item}
+    <div>{$store?.data?.item._id}</div>
+    <div>{$store?.data?.item.name}</div>
+    <div>
+      <a class="m-2" href={`/items/edit/${$store?.data?.item._id}`}>Edit</a>
+    </div>
+    <div>
+      <a class="m-2" href={`/items/del/${$store?.data?.item._id}`}>Del</a>
+    </div>
+  {/if}
+</div>

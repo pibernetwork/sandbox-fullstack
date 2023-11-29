@@ -1,12 +1,17 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import View from '$lib/items/view.svelte';
-  import type { PageData } from './$types';
+  import { redirect } from '@sveltejs/kit';
 
-  export let data: PageData;
+  const id = $page?.params['id'];
+
+  if (!id) {
+    throw redirect(303, '/items');
+  }
 </script>
 
-<h1>View {data.id}</h1>
+<h1>View {id}</h1>
 
-<View id={data.id}></View>
+<View {id}></View>
 
 <a href="/items">Back</a>
