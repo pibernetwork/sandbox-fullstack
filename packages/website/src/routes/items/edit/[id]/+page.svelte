@@ -3,8 +3,11 @@
   import { page } from '$app/stores';
   import { EditItemStore, graphql } from '$houdini';
   import { redirect } from '@sveltejs/kit';
+  import type { PageData } from './$types';
 
   const id = $page?.params['id'];
+
+  export let data: PageData;
 
   const store = graphql(`
     query GetItemView($_id: String!) {
@@ -16,7 +19,7 @@
   `);
 
   if (id) {
-    store.fetch({ variables: { _id: id } });
+    store.fetch({ event: data['event'], variables: { _id: id } });
   }
 
   if (!id) {

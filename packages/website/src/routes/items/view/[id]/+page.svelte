@@ -1,17 +1,38 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import View from '$lib/items/view.svelte';
-  import { redirect } from '@sveltejs/kit';
+  import { graphql } from '$houdini';
+  import type { PageData } from '../$types';
+
+  export let data: PageData;
 
   const id = $page?.params['id'];
 
-  if (!id) {
-    throw redirect(303, '/items');
+  const store = graphql(`
+    query GetItemTwo($_id: String!) {
+      item(_id: $_id) {
+        _id
+        name
+      }
+    }
+  `);
+
+  if (id) {
+    store.fetch({ event: data['event'], variables: { _id: id } });
   }
 </script>
 
 <h1>View {id}</h1>
-
-<View {id}></View>
+<div class="m-2">
+  {#if $store?.data?.item}
+    <div>{$store?.data?.item._id}</div>
+    <div>{$store?.data?.item.name}</div>
+    <div>
+      <a class="m-2" href={`/items/edit/${$store?.data?.item._id}`}>Edit</a>
+    </div>
+    <div>
+      <a class="m-2" href={`/items/del/${$store?.data?.item._id}`}>Del</a>
+    </div>
+  {/if}
+</div>
 
 <a href="/items">Back</a>
