@@ -7,7 +7,7 @@
   export let form: ActionData;
 </script>
 
-<h1>Add Item</h1>
+<h1>Add item</h1>
 <form method="POST" use:enhance>
   <label>
     Name

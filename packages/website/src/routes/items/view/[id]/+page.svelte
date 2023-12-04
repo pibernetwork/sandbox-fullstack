@@ -21,9 +21,11 @@
   }
 </script>
 
-<h1>View {id}</h1>
+<h1>View item {id}</h1>
+{JSON.stringify($store)}
 <div class="m-2">
   {#if $store?.data?.item}
+    <h2>Item loaded</h2>
     <div>{$store?.data?.item._id}</div>
     <div>{$store?.data?.item.name}</div>
     <div>

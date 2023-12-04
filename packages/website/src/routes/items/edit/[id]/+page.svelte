@@ -19,7 +19,7 @@
   `);
 
   if (id) {
-    store.fetch({ event: data['event'], variables: { _id: id } });
+    store.fetch({ event: data.event, variables: { _id: id } });
   }
 
   if (!id) {

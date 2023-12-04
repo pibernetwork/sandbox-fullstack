@@ -19,7 +19,7 @@
 
 <h1>Items</h1>
 <a href="/items/add">Add</a>
-
+{JSON.stringify($store?.data)}
 <p>List</p>
 <div class="p-2">
   {#if $store?.data?.itemsConnection.nodes}
