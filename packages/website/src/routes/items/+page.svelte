@@ -18,15 +18,17 @@
 </script>
 
 <h1>Items</h1>
-<a href="/items/add">Add</a>
-{JSON.stringify($store?.data)}
-<p>List</p>
+<a
+  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+  href="/items/add">Add</a
+>
+<p class="m-2">List</p>
 <div class="p-2">
   {#if $store?.data?.itemsConnection.nodes}
-    <div class="grid grid-cols-1 gap-2">
+    <div class="grid grid-cols-1 gap-2" role="list">
       {#each $store?.data?.itemsConnection.nodes as item}
         {#if item}
-          <div class="flex">
+          <div class="flex" role="listitem">
             <div>{item.name}</div>
             <div><a class="m-2" href={`/items/edit/${item._id}`}>Edit</a></div>
             <div><a class="m-2" href={`/items/del/${item._id}`}>Del</a></div>

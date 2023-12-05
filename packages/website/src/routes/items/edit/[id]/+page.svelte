@@ -1,13 +1,14 @@
 <script lang="ts">
   import { enhance } from '$app/forms';
   import { page } from '$app/stores';
-  import { EditItemStore, graphql } from '$houdini';
+  import { graphql } from '$houdini';
   import { redirect } from '@sveltejs/kit';
-  import type { PageData } from './$types';
+  import type { ActionData, PageData } from './$types';
 
   const id = $page?.params['id'];
 
   export let data: PageData;
+  export let form: ActionData;
 
   const store = graphql(`
     query GetItemView($_id: String!) {
@@ -25,15 +26,6 @@
   if (!id) {
     throw redirect(303, '/items');
   }
-
-  const update = new EditItemStore();
-
-  async function submitForm() {
-    if (!id) {
-      return;
-    }
-    await update.mutate({ id: id, name: 'Edited!' });
-  }
 </script>
 
 <h1>Edit Item {id}</h1>
@@ -47,9 +39,14 @@
     <input name="name" type="name" value={$store.data?.item.name} />
   </label>
 
-  <button>Edit</button>
+  <button>Save</button>
 </form>
 
-{JSON.stringify($store)}
-<button on:click={submitForm}>Save</button>
 <a href="/items">Back</a>
+
+<pre>
+  {JSON.stringify(form)}
+</pre>
+<pre>
+  {JSON.stringify(data)}
+</pre>

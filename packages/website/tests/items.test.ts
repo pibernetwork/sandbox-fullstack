@@ -1,15 +1,8 @@
 import { expect, test } from '@playwright/test';
 
-test('Enter items page', async ({ page }) => {
+test('List items', async ({ page }) => {
   // Mock the api call before navigating
   await page.route('**/graphql', async (route) => {
-    const post = route.request().postData();
-    if (!post) {
-      throw new Error('Missing post data');
-    }
-    const postData = JSON.parse(post) as { operationName: string };
-
-    console.log(postData.operationName);
     const json = {
       data: {
         itemsConnection: {
@@ -87,14 +80,62 @@ test('Enter items page', async ({ page }) => {
 
   await page.goto('/items');
   await expect(page.getByRole('heading', { name: 'Items' })).toBeVisible();
+
+  await expect(page.getByRole('listitem')).toHaveCount(15);
 });
 
 test('Add item', async ({ page }) => {
+  await page.route('**/graphql', async (route) => {
+    const post = route.request().postData();
+    if (!post) {
+      throw new Error('Missing post data');
+    }
+    const postData = JSON.parse(post) as { operationName: string };
+
+    switch (postData.operationName) {
+      case 'GetItems': {
+        const json = {
+          data: {
+            itemsConnection: {
+              nodes: [
+                {
+                  _id: '656749d05e217410b0512d88',
+                  name: 'Mauricio Piber Fão - WORKING2',
+                },
+              ],
+              pageInfo: {
+                totalNodes: 1,
+                totalPages: 1,
+              },
+            },
+          },
+        };
+        await route.fulfill({ json });
+        break;
+      }
+    }
+  });
+
+  await page.route('**/items/add', async (route) => {
+    const json = {
+      data: '[{"fetching":1,"variables":2,"data":4,"errors":9,"partial":1,"stale":1,"source":10},false,{"name":3},"Mauricio Piber",{"addItem":5},{"node":6,"errors":8},{"_id":7,"name":3},"656f40504494389b05d4f727",[],null,"network"]',
+      status: 200,
+      type: 'success',
+    };
+    route.fulfill({ json });
+  });
+
   await page.goto('/items');
 
   await page.click('a:has-text("Add")');
 
   await expect(page.getByRole('heading', { name: 'Add item' })).toBeVisible();
+
+  await page.getByLabel('Name').fill('Mauricio Piber');
+
+  await page.locator('button:text("Create")').click();
+
+  await expect(page.getByText('Item added to server')).toBeVisible();
 });
 
 test('Edit item', async ({ page }) => {

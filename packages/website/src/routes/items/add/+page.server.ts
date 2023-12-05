@@ -1,16 +1,11 @@
 import { graphql } from '$houdini';
-import { fail, redirect } from '@sveltejs/kit';
 
 /* @type { import('./$types').Actions } */
 export const actions = {
   default: async (event) => {
     const data = await event.request.formData();
 
-    const name = data.get('name')?.toString();
-
-    if (!name) {
-      return fail(403, { name: '*' });
-    }
+    const name = data.get('name')?.toString() || '';
 
     const addMutation = graphql(`
       mutation AddItem($name: String!) {
@@ -28,10 +23,6 @@ export const actions = {
     `);
 
     const response = await addMutation.mutate({ name }, { event });
-
-    if (response?.data?.addItem) {
-      throw redirect(303, '/items');
-    }
 
     return response;
   },

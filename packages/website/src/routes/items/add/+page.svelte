@@ -25,6 +25,6 @@
 </pre>
 
 {#if form?.data?.addItem?.node}
-  Item added to server
+  <div>Item added to server</div>
 {/if}
 <a href="/items">Back</a>
