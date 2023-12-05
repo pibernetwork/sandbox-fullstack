@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-
+/* eslint-disable max-lines */
 test('List items', async ({ page }) => {
   // Mock the api call before navigating
   await page.route('**/graphql', async (route) => {
@@ -182,11 +182,27 @@ test('Edit item', async ({ page }) => {
       }
     }
   });
+
+  await page.route('**/items/edit/656749d05e217410b0512d88', async (route) => {
+    const json = {
+      data: '[{"fetching":1,"variables":2,"data":5,"errors":9,"partial":1,"stale":1,"source":10},false,{"id":3,"name":4},"656f3846aabed4205c7b47d9","Mauricio Piber",{"editItem":6},{"node":7,"errors":8},{"_id":3,"name":4},[],null,"network"]',
+      status: 200,
+      type: 'success',
+    };
+    route.fulfill({ json });
+  });
+
   await page.goto('/items');
 
   await page.click('a:has-text("Edit")');
 
   await expect(page.getByRole('heading', { name: 'Edit item' })).toBeVisible();
+
+  await page.getByLabel('Name').fill('Mauricio Piber - Updated value');
+
+  await page.locator('button:text("Save")').click();
+
+  await expect(page.getByText('Item updated on server')).toBeVisible();
 });
 
 test('View item', async ({ page }) => {
@@ -246,9 +262,42 @@ test('View item', async ({ page }) => {
 });
 
 test('Del item', async ({ page }) => {
+  await page.route('**/graphql', async (route) => {
+    const json = {
+      data: {
+        itemsConnection: {
+          nodes: [
+            {
+              _id: '656749d05e217410b0512d88',
+              name: 'Mauricio Piber Fão - WORKING2',
+            },
+          ],
+          pageInfo: {
+            totalNodes: 1,
+            totalPages: 1,
+          },
+        },
+      },
+    };
+    await route.fulfill({ json });
+  });
+
+  await page.route('**/items/del/656749d05e217410b0512d88', async (route) => {
+    const json = {
+      data: '[{"fetching":1,"variables":2,"data":4,"errors":6,"partial":1,"stale":1,"source":7},false,{"id":3},"6567518afff9aa880aee2bb0",{"delItem":5},true,null,"network"]',
+      status: 200,
+      type: 'success',
+    };
+    route.fulfill({ json });
+  });
+
   await page.goto('/items');
 
   await page.click('a:has-text("Del")');
 
   await expect(page.getByRole('heading', { name: 'Del item' })).toBeVisible();
+
+  await page.locator('button:text("Yes")').click();
+
+  await expect(page.getByText('Item deleted from server')).toBeVisible();
 });

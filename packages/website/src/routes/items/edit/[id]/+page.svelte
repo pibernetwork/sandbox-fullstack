@@ -30,7 +30,6 @@
 
 <h1>Edit Item {id}</h1>
 
-<h1>Add Item</h1>
 <form method="POST" use:enhance>
   <input name="id" type="hidden" value={$store.data?.item._id} />
 
@@ -43,7 +42,9 @@
 </form>
 
 <a href="/items">Back</a>
-
+{#if form?.data?.editItem?.node}
+  <div>Item updated on server</div>
+{/if}
 <pre>
   {JSON.stringify(form)}
 </pre>

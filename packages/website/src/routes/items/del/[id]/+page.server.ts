@@ -1,5 +1,5 @@
 import { graphql } from '$houdini';
-import { fail, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 
 /* @type { import('./$types').Actions } */
 export const actions = {
@@ -19,10 +19,6 @@ export const actions = {
     `);
 
     const response = await delMutation.mutate({ id }, { event });
-
-    if (response.data?.delItem) {
-      throw redirect(303, '/items');
-    }
 
     return response;
   },

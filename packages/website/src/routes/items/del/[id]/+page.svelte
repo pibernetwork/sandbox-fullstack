@@ -1,13 +1,13 @@
 <script lang="ts">
   import { enhance } from '$app/forms';
-  import type { PageData } from './$types';
+  import type { ActionData, PageData } from './$types';
 
   export let data: PageData;
+
+  export let form: ActionData;
 </script>
 
 <h1>Del Item {data.id}</h1>
-
-<a href="/items">Back</a>
 
 <h1>Add Item</h1>
 <form method="POST" use:enhance>
@@ -17,5 +17,9 @@
   </p>
 
   <button>Yes</button>
-  <a href="/items">Back</a>
 </form>
+
+{#if form?.data?.delItem}
+  <div>Item deleted from server</div>
+{/if}
+<a href="/items">Back</a>
