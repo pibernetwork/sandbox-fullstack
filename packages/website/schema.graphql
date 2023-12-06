@@ -12,6 +12,7 @@ type FormError {
 type Item {
   _id: String!
   name: String
+  quantity: Int
 }
 
 type ItemConnection {

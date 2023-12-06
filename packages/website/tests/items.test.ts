@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test';
 /* eslint-disable max-lines */
 test('List items', async ({ page }) => {
-  // Mock the api call before navigating
   await page.route('**/graphql', async (route) => {
     const json = {
       data: {

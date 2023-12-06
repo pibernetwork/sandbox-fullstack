@@ -15,6 +15,7 @@ class ItemService extends GenericService<Item> {
   override getDocumentSchema(): z.ZodType<Item, z.ZodTypeDef, Item> {
     return z.object({
       name: z.string().min(1),
+      quantity: z.number().positive(),
     }) satisfies z.ZodType<Item>;
   }
 }

@@ -7,6 +7,7 @@ export const typeDefs = gql.default`
   type Item {
     _id: String!
     name: String
+    quantity: Int
   }
 
   type ItemResponse {
