@@ -211,6 +211,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^6.0.0
         version: 6.11.0(eslint@8.53.0)(typescript@5.2.2)
+      '@vincjo/datatables':
+        specifier: ^1.14.1
+        version: 1.14.1(svelte@4.2.7)
       autoprefixer:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.32)
@@ -223,6 +226,12 @@ importers:
       eslint-plugin-svelte:
         specifier: ^2.30.0
         version: 2.35.0(eslint@8.53.0)(svelte@4.2.7)
+      houdini:
+        specifier: ^1.2.34
+        version: 1.2.34
+      houdini-svelte:
+        specifier: ^1.2.34
+        version: 1.2.34(@types/node@20.10.4)
       postcss:
         specifier: 8.4.32
         version: 8.4.32
@@ -3235,7 +3244,7 @@ packages:
       svelte: 3.59.2
       tiny-glob: 0.2.9
       undici: 5.26.5
-      vite: 4.5.0(@types/node@18.18.8)
+      vite: 4.5.0(@types/node@20.10.4)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3279,7 +3288,7 @@ packages:
       '@sveltejs/vite-plugin-svelte': 2.5.2(svelte@3.59.2)(vite@4.5.0)
       debug: 4.3.4
       svelte: 3.59.2
-      vite: 4.5.0(@types/node@18.18.8)
+      vite: 4.5.0(@types/node@20.10.4)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3314,7 +3323,7 @@ packages:
       magic-string: 0.30.5
       svelte: 3.59.2
       svelte-hmr: 0.15.3(svelte@3.59.2)
-      vite: 4.5.0(@types/node@18.18.8)
+      vite: 4.5.0(@types/node@20.10.4)
       vitefu: 0.2.5(vite@4.5.0)
     transitivePeerDependencies:
       - supports-color
@@ -3992,6 +4001,14 @@ packages:
       json-schema-to-ts: 1.6.4
       ts-morph: 12.0.0
     dev: false
+
+  /@vincjo/datatables@1.14.1(svelte@4.2.7):
+    resolution: {integrity: sha512-7xip3EAs1zmnEmSb44UGI4gpWCt8J7pp+7Jwit8xGSpDy7pPFC1X9FmUPo7D3Y2FIkz1ddk95zNHWuh0LOETdA==}
+    peerDependencies:
+      svelte: '>=3.54.0'
+    dependencies:
+      svelte: 4.2.7
+    dev: true
 
   /@vitest/coverage-v8@0.34.6(vitest@0.32.4):
     resolution: {integrity: sha512-fivy/OK2d/EsJFoEoxHFEnNGTg+MmdZBAVK9Ka4qhXR2K3J0DS08vcGVwzDtXSuUMabLv4KtPcpSKkcMXFDViw==}
@@ -7269,7 +7286,7 @@ packages:
       ast-types: 0.16.1
       estree-walker: 3.0.3
       graphql: 15.8.0
-      houdini: 1.2.33
+      houdini: 1.2.34
       recast: 0.23.4
       rollup: 3.29.4
       svelte: 3.59.2
@@ -7285,8 +7302,63 @@ packages:
       - terser
     dev: true
 
+  /houdini-svelte@1.2.34(@types/node@20.10.4):
+    resolution: {integrity: sha512-YlDAUf5fKBmOHJatKZTpG+pIdprm2mffa7rfh4coLWsAJ23YE/JAH7fyTnEKaqWK3rOCo8NqsB1Ad+l4cpNeZA==}
+    dependencies:
+      '@kitql/helpers': 0.8.4
+      '@sveltejs/kit': 1.27.6(svelte@3.59.2)(vite@4.5.0)
+      ast-types: 0.16.1
+      estree-walker: 3.0.3
+      graphql: 15.8.0
+      houdini: 1.2.34
+      recast: 0.23.4
+      rollup: 3.29.4
+      svelte: 3.59.2
+      vite: 4.5.0(@types/node@20.10.4)
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - lightningcss
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+    dev: true
+
   /houdini@1.2.33:
     resolution: {integrity: sha512-GNcPIqwLeNK6EZlZzGw0JaUl9AGzI5bUCm5zZsQwMHN/bOlC02RaF0GJARShnhTy+bQAhgGKhjGvQNyf3xE7Jw==}
+    hasBin: true
+    dependencies:
+      '@babel/parser': 7.23.4
+      '@clack/prompts': 0.6.3
+      '@graphql-tools/merge': 9.0.1(graphql@15.8.0)
+      '@graphql-tools/schema': 9.0.19(graphql@15.8.0)
+      '@kitql/helpers': 0.8.4
+      '@types/estree': 1.0.5
+      '@types/fs-extra': 9.0.13
+      '@types/micromatch': 4.0.6
+      '@ungap/structured-clone': 1.2.0
+      '@whatwg-node/server': 0.9.18
+      ast-types: 0.16.1
+      commander: 9.5.0
+      deepmerge: 4.3.1
+      estree-walker: 3.0.3
+      fs-extra: 10.1.0
+      glob: 8.1.0
+      graphql: 15.8.0
+      graphql-yoga: 4.0.5(graphql@15.8.0)
+      memfs: 3.5.3
+      micromatch: 4.0.5
+      minimatch: 5.1.6
+      node-fetch: 3.3.2
+      npx-import: 1.1.4
+      recast: 0.23.4
+      vite-plugin-watch-and-run: 1.4.4
+    dev: true
+
+  /houdini@1.2.34:
+    resolution: {integrity: sha512-toBmBHb5qUZFKWyva/GOOzXoLYSKK/Vxl+hEn+o9nMJITr3dNsF6MRS8mgWyUrI1Yp6Pj/lvmGvwsOscYDQM8Q==}
     hasBin: true
     dependencies:
       '@babel/parser': 7.23.4
