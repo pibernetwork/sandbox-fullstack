@@ -7,6 +7,7 @@ import {
 
 export interface Item {
   name: string;
+  quantity: number;
 }
 
 export type ItemWithId = WithId<Item>;
