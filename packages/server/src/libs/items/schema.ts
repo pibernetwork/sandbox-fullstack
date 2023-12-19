@@ -23,7 +23,6 @@ export const typeDefs = gql.default`
 
   type Query {
     item(_id: String!): Item!
-    items: [Item]
     itemsConnection(page: Int!, limit: Int!, sortBy: String!, sortOrder: String!): ItemConnection!
   }
 
@@ -51,9 +50,6 @@ export const resolvers: Resolvers = {
   Query: {
     item: (_, args, context) => {
       return context.itemService.findOne(args._id);
-    },
-    items: (_, __, context) => {
-      return context.itemService.findAll();
     },
     itemsConnection: (_, args, context) => {
       const options: MongoDatabaseServiceFindOptions<Item> = {
